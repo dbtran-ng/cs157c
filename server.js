@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+
 const MongoClient = require('mongodb').MongoClient;
+app.use('/public', express.static('./public/'));
 app.use(bodyParser.urlencoded({ extended: true }));
 const connectionString =
   'mongodb+srv://root:root@cluster0.6qegf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
@@ -28,14 +30,13 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         .insertOne(req.body)
         .then((result) => {
           console.log(result);
-          window.location.reload(true);
         })
         .catch((error) => console.error(error));
     });
     app.put('/quotes', (req, res) => {
-      quotesCollection
+      airportsCollection
         .findOneAndUpdate(
-          { code: 'AAA' },
+          { name: 'd' },
           {
             $set: {
               name: req.body.name,
@@ -46,6 +47,15 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
             upsert: true,
           }
         )
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => console.error(error));
+    });
+
+    app.delete('/quotes', (req, res) => {
+      airportsCollection
+        .deleteOne({ name: req.body.name })
         .then((result) => {
           console.log(result);
         })
