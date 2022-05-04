@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Airport Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="/public/app.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="centering"><span id="h1-symbol">&#10073;&nbsp;</span>
+            <a href="/airports">Airports Database Center</a>
+        </h1>
+
+        <h1>Airport Details</h1>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Code</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.code %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.name %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>ICAO</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.icao %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.type %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.phone %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.email %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>URL</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.url %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.city %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>State</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.state %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.country %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Elevation</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.elev %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TZ</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.tz %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Latitude</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.lat %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Longitude</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.lon %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>woeid</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.woeid %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>carriers</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.carriers %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>direct_flights</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.direct_flights %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>runway_length</td>
+                    <td>:</td>
+                    <td>
+                        <%= airport.runway_length %>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="d-flex mt-3">
+            <form action="/airports/<%= airport._id%>/edit" method="get">
+                <button type="submit" class="btn btn-primary mr-3">EDIT</button>
+            </form>
+            <form action="/airports/<%= airport._id%>/delete" method="delete">
+                <button type="submit" class="btn btn-danger">DELETE</button>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

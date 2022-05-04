@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Airport</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="/public/app.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <h1 class="centering"><span id="h1-symbol">&#10073;&nbsp;</span>
+            <a href="/airports">Airports Database Center</a>
+        </h1>
+
+
+        <h1>Edit Airport: <%=airport.name%>
+        </h1>
+
+        <div id="inputs-wrapper" class="container-fluid centering my-2">
+            <form action="/airports/update/<%= airport._id%>" method="post">
+                <div class="row">
+                    <div class="col-3 form-group">
+                        <label for="name" class="labels">Name:</label>
+                        <input type="text" name="name" class="textinput gap-2" value="<%=airport.name%>">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label for="code" class="labels">Code:</label>
+                        <input type="text" name="code" class="textinput gap-2" value="<%=airport.code%>">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label for="icao" class="labels">ICAO:</label>
+                        <input type="text" name="icao" class="textinput gap-2" value="<%=airport.icao%>">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label for="type" class="labels">Type:</label>
+                        <input type="text" disabled name="type" class="textinput gap-2" placeholder="Airports"
+                            value="Airports" default="Airports">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 form-group">
+                        <label for="phone" class="labels">Phone:</label>
+                        <input type="text" name="phone" class="textinput gap-2" value="<%=airport.phone%>">
+                    </div>
+                    <div class="col-4 form-group">
+                        <label for="email" class="labels">Email:</label>
+                        <input type="text" name="email" class="textinput gap-2" value="<%=airport.email%>">
+                    </div>
+                    <div class="col-4 form-group">
+                        <label for="url" class="labels">URL:</label>
+                        <input type="text" name="url" class="textinput gap-2" value="<%=airport.url%>">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 form-group">
+                        <label for="city" class="labels">City:</label>
+                        <input type="text" name="city" class="textinput gap-2" value="<%=airport.city%>">
+                    </div>
+                    <div class="col-4 form-group">
+                        <label for="state" class="labels">State:</label>
+                        <input type="text" name="state" class="textinput gap-2" value="<%=airport.state%>">
+                    </div>
+                    <div class="col-4 form-group">
+                        <label for="country" class="labels">Country:</label>
+                        <input type="text" name="country" class="textinput gap-2" value="<%=airport.country%>">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3 form-group">
+                        <label for="elev" class="labels">Elevation:</label>
+                        <input type="text" name="elev" class="textinput gap-2" value="<%=airport.elev%>">
+                    </div>
+
+                    <div class="col-3 form-group">
+                        <label for="tz" class="labels">TZ:</label>
+                        <input type="text" name="tz" class="textinput gap-2" value="<%=airport.tz%>">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label for="lat" class="labels">Latitude:</label>
+                        <input type="text" name="lat" class="textinput gap-2" value="<%=airport.lat%>">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label for="lon" class="labels">Longitude:</label>
+                        <input type="text" name="lon" class="textinput gap-2" value="<%=airport.lon%>">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 form-group">
+                        <label for="woeid" class="labels">woeid:</label>
+                        <input type="text" name="woeid" class="textinput gap-2" value="<%=airport.woeid%>">
+                    </div>
+                    <div class="col-6 form-group">
+                        <label for="carriers" class="labels">carriers:</label>
+                        <input type="text" name="carriers" class="textinput gap-2" value="<%=airport.carriers%>">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 form-group">
+                        <label for="direct_flights" class="labels">direct_flights:</label>
+                        <input type="text" name="direct_flights" class="textinput gap-2"
+                            value="<%=airport.direct_flights%>">
+                    </div>
+                    <div class="col-6 form-group">
+                        <label for="runway_length" class="labels">runway_length:</label>
+                        <input type="text" name="runway_length" class="textinput gap-2"
+                            value="<%=airport.runway_length%>">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success" title="Update data">Update</button>
+            </form>
+        </div>
+
+    </div>
+
+
+    <script src="/public/main.js"></script>
+</body>
+
+</html>

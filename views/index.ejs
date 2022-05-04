@@ -1,54 +1,248 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>Star Wars Quote App</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Airports Database</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="/public/app.css">
 </head>
 
 <body>
-    <h1>Airports queries</h1>
 
-    <form action="/quotes" method="POST">
-        <input type="text" placeholder="code" name="code">
-        <input type="text" placeholder="lat" name="lat">
-        <input type="text" placeholder="lon" name="code">
-        <input type="text" placeholder="name" name="name">
-        <input type="text" placeholder="city" name="city">
-        <input type="text" placeholder="state" name="state">
-        <input type="text" placeholder="county" name="county">
-        <input type="text" placeholder="woeid" name="woeid">
-        <input type="text" placeholder="tz" name="tz">
-        <input type="text" placeholder="email" name="email">
-        <input type="text" placeholder="url" name="url">
-        <input type="text" placeholder="runway_length" name="runway_length">
-        <input type="text" placeholder="elev" name="elev">
-        <input type="text" placeholder="icao" name="icao">
-        <input type="text" placeholder="direct_flights" name="direct_flights">
-        <input type="text" placeholder="carriers" name="carriers">
-        <button type="submit">Submit</button>
-    </form>
+    <h1 class="centering"><span id="h1-symbol">&#10073;&nbsp;</span>Airports Database Center</h1>
 
-    <h2> All Airports </h2>
 
-    <ul class="airports">
-        <!-- Loop through quotes -->
-        <% for(var i=0; i < airportsArray.length; i++) {%>
-            <li class="quote">
-                <!-- Output name from the iterated quote object -->
-                <span>
-                    <%= airportsArray[i].name %>
-                </span>:
-                <!-- Output quote from the iterated quote object -->
-                <span>
-                    <%= airportsArray[i].country %>
-                </span>
-            </li>
-            <li>
-                <button id="update-button">Update</button>
-                <button id="delete-button">Delete</button>
-            </li>
-            <% } %>
-    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane  in active">
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="buttons-wrapper">
+                        <button type="button" class="btn btn-success" onclick="addData()"
+                            title="Add new row to the table from the text inputs">Add</button>
+                        <span class="gap-1"></span>
+                        <button type="button" class="btn btn-danger" onclick="deleteData()"
+                            title="Delete selected row">Delete</button>
+                        <span class="gap-1"></span>
+                        <button type="button" class="btn btn-warning" onclick="clearData()"
+                            title="Clear selection and text inputs">Clear</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group mb-3">
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
+                                    class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="inputs-wrapper" class="container-fluid centering my-2">
+        <form action="/addAirport" method="POST">
+            <div class="row">
+                <div class="col-3 form-group">
+                    <label for="name" class="labels">Name:</label>
+                    <input type="text" id="name" class="textinput gap-2" placeholder="Enter name (required)">
+                </div>
+                <div class="col-3 form-group">
+                    <label for="code" class="labels">Code:</label>
+                    <input type="text" id="code" class="textinput gap-2" placeholder="Enter code (required)">
+                </div>
+                <div class="col-3 form-group">
+                    <label for="icao" class="labels">ICAO:</label>
+                    <input type="text" id="icao" class="textinput gap-2" placeholder="Enter icao (required)">
+                </div>
+                <div class="col-3 form-group">
+                    <label for="type" class="labels">Type:</label>
+                    <input type="text" disabled id="type" class="textinput gap-2" placeholder="Airports"
+                        value="Airports" default="Airports">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 form-group">
+                    <label for="phone" class="labels">Phone:</label>
+                    <input type="text" id="phone" class="textinput gap-2" placeholder="Enter phone (required)">
+                </div>
+                <div class="col-4 form-group">
+                    <label for="email" class="labels">Email:</label>
+                    <input type="text" id="email" class="textinput gap-2" placeholder="Enter email (required)">
+                </div>
+                <div class="col-4 form-group">
+                    <label for="url" class="labels">URL:</label>
+                    <input type="text" id="url" class="textinput gap-2" placeholder="Enter URL (required)">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 form-group">
+                    <label for="city" class="labels">City:</label>
+                    <input type="text" id="city" class="textinput gap-2" placeholder="Enter city (required)">
+                </div>
+                <div class="col-4 form-group">
+                    <label for="state" class="labels">State:</label>
+                    <input type="text" id="state" class="textinput gap-2" placeholder="Enter state (required)">
+                </div>
+                <div class="col-4 form-group">
+                    <label for="country" class="labels">Country:</label>
+                    <input type="text" id="country" class="textinput gap-2" placeholder="Enter country (required)">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 form-group">
+                    <label for="elev" class="labels">Elevation:</label>
+                    <input type="text" id="elev" class="textinput gap-2" placeholder="Enter elevation (required)">
+                </div>
+
+                <div class="col-3 form-group">
+                    <label for="tz" class="labels">TZ:</label>
+                    <input type="text" id="tz" class="textinput gap-2" placeholder="Enter tz (required)">
+                </div>
+                <div class="col-3 form-group">
+                    <label for="lat" class="labels">Latitude:</label>
+                    <input type="text" id="lat" class="textinput gap-2" placeholder="Enter lat (required)">
+                </div>
+                <div class="col-3 form-group">
+                    <label for="lon" class="labels">Longitude:</label>
+                    <input type="text" id="lon" class="textinput gap-2" placeholder="Enter lon (required)">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 form-group">
+                    <label for="woeid" class="labels">woeid:</label>
+                    <input type="text" id="woeid" class="textinput gap-2" placeholder="Enter woeid (required)">
+                </div>
+                <div class="col-6 form-group">
+                    <label for="carriers" class="labels">carriers:</label>
+                    <input type="text" id="carriers" class="textinput gap-2" placeholder="Enter carriers (required)">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 form-group">
+                    <label for="direct_flights" class="labels">direct_flights:</label>
+                    <input type="text" id="direct_flights" class="textinput gap-2"
+                        placeholder="Enter direct_flights (required)">
+                </div>
+                <div class="col-6 form-group">
+                    <label for="runway_length" class="labels">runway_length:</label>
+                    <input type="text" id="runway_length" class="textinput gap-2"
+                        placeholder="Enter runway_length (required)">
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+    <h1 class="centering"><span id="h1-symbol">&#10073;&nbsp;</span>All Airports</h1>
+
+
+    <div id="grid-container">
+        <div id="table-wrapper">
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th scope="col">_id</th>
+                        <th scope="col">code</th>
+                        <th scope="col">icao</th>
+                        <th scope="col">name</th>
+                        <th scope="col">city</th>
+                        <th scope="col">state</th>
+                        <th scope="col">country</th>
+                        <th scope="col">elevation</th>
+                        <th scope="col">lat</th>
+                        <th scope="col">lon</th>
+                        <th scope="col">tz</th>
+                        <th scope="col">Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%airportsArray.forEach(airport=> {%>
+
+                        <tr>
+                            <th scope="row">
+                                <a href="<%= `/airports/show/${airport._id}` %>">
+                                    <%= airport._id %>
+                                </a>
+                            </th>
+                            <td>
+                                <%= airport.code %>
+                            </td>
+                            <td>
+                                <%= airport.icao %>
+                            </td>
+                            <td>
+                                <%= airport.name %>
+                            </td>
+                            <td>
+                                <%= airport.city %>
+                            </td>
+                            <td>
+                                <%= airport.state %>
+                            </td>
+                            <td>
+                                <%= airport.country %>
+                            </td>
+                            <td>
+                                <%= airport.elev %>
+                            </td>
+                            <td>
+                                <%= airport.lat %>
+                            </td>
+                            <td>
+                                <%= airport.lon %>
+                            </td>
+                            <td>
+                                <%= airport.tz %>
+                            </td>
+                            <td>
+                                <a class="btn btn-raised btn-primary"
+                                    href="<%= `/airports/${airport._id}/edit` %>">Edit</a>
+                                <a class="btn btn-raised btn-danger"
+                                    href="<%= `/airports/${airport._id}/delete` %>">Delete</a>
+                            </td>
+                        </tr>
+
+                        <%})%>
+                </tbody>
+            </table>
+        </div>
+        <div id=" table-btn-wrapper">
+            <span class="table-btn" onclick="selectTopOrBottomRow(1)"
+                title="Select first row (of the table)">&#708;</span>
+            <span class="table-btn" onclick="selectTopOrBottomRow(0)"
+                title="Select last row (of the table)">&#709</span>
+        </div>
+    </div>
+
+    <br><br>
+
+
+    <div id="status-label" class="labels">
+        Status: <span id="status" class="gap-2"></span>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
 
     <script src="/public/main.js"></script>
 </body>
