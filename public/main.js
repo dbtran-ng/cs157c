@@ -3,6 +3,37 @@ const getURL = 'http://localhost:4000/';
 const postURL = 'http://localhost:4000/addAirport';
 const deleteURL = 'http://localhost:4000/deleteAirport/';
 
+let selectedRowIx;
+let prevSelection;
+let table;
+
+window.onload = () => {
+  table = document.getElementById('data-table');
+};
+
+function selectTopOrBottomRow(n) {
+  if (table.rows.length < 2) {
+    document.getElementById('status').innerHTML = 'No data in table!';
+    return;
+  }
+
+  selectedRowIx = n === 1 ? 1 : table.rows.length - 1;
+  scrollToSelection();
+}
+function scrollToSelection() {
+  const ele = document.getElementById('table-wrapper');
+  const bucketHt = ele.clientHeight;
+  const itemHt = ele.scrollHeight / table.rows.length;
+  const noItemsInBucket = parseInt(bucketHt / itemHt);
+  const targetBucket = (selectedRowIx + 1) / noItemsInBucket;
+  const scrollPos = bucketHt * (targetBucket - 1) + bucketHt / 2;
+  ele.scrollTop = Math.round(scrollPos);
+}
+
+function clearData() {
+  document.getElementById('formCreate').reset();
+}
+
 function addData() {
   const code = document.getElementById('code').value;
   const name = document.getElementById('name').value;
@@ -29,7 +60,7 @@ function addData() {
     return;
   }
   if (!name) {
-    alert('Name is required!!');
+    alert('Code is required!!');
     document.getElementById('name').focus();
     return;
   }
@@ -90,18 +121,6 @@ function postToDB(doc) {
     });
 }
 
-// const update = document.querySelector('#update-button');
-
-// update.addEventListener('click', (_) => {
-//   fetch('/quotes', {
-//     method: 'put',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify({
-//       name: 'd',
-//       country: 'Canada',
-//     }),
-//   });
-// });
 function updateData() {
   const code = document.getElementById('edit-code').value;
   const name = document.getElementById('edit-name').value;
@@ -171,3 +190,13 @@ function updateToDB(doc) {
       document.getElementById('status').innerHTML = msg;
     });
 }
+
+// function dosearch() {
+//   var sf = document.searchform;
+//   var submitto =
+//     sf.sengines.options[sf.location.selectedIndex].value +
+//     escape(sf.searchterms.value);
+//   console.log(submitto);
+//   window.location.href = submitto;
+//   return false;
+// }

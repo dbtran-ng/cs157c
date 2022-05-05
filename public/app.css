@@ -42,7 +42,7 @@ h1 {
 }
 
 #table-wrapper {
-  height: 250px;
+  height: 550px;
   width: 100%;
   border-bottom: 1px solid lightgrey;
   padding-bottom: 25px;
@@ -63,7 +63,7 @@ th {
 th {
   background: #eeeeee;
 }
-table tr th:nth-child(4),
+table tr th:nth-child(2),
 table tr td:nth-child(4) {
   display: none;
 }
