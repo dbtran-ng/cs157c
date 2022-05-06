@@ -34,7 +34,8 @@ function clearData() {
   document.getElementById('formCreate').reset();
 }
 
-function addData() {
+function addData(event) {
+  event.preventDefault();
   const code = document.getElementById('code').value;
   const name = document.getElementById('name').value;
   const icao = document.getElementById('icao').value;
@@ -101,6 +102,7 @@ function postToDB(doc) {
     body: JSON.stringify(doc),
   })
     .then((res) => {
+      window.location.reload();
       if (res.ok) {
         return res.json();
       } else {

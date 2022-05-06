@@ -292,10 +292,10 @@ app.get('/airports/show/:id', (req, res) => {
 // add new airport
 app.post('/addAirport', async (req, res) => {
   let data = req.body;
-  console.log('add Airport');
   try {
     data = await Airport.create(data);
-    return res.json(data);
+    console.log(data);
+    res.json(data);
   } catch (err) {
     console.error('# Post Error', err);
     res.status(500).send({ error: err.name + ', ' + err.message });
@@ -817,6 +817,10 @@ app.get('/', (req, res) => {
   res.redirect('/airports');
 });
 
-app.listen(4000, function () {
-  console.log('server is running');
+app.listen(process.env.PORT || 4000, function () {
+  console.log(
+    'Express server listening on port %d in %s mode',
+    this.address().port,
+    app.settings.env
+  );
 });
