@@ -63,23 +63,34 @@
             <option value="http://www.google.com/search?q=" selected>Google</option>
             <option value="/searchContinentalAirports?q=">Continental</option>
             <option value="/searchCountryAirports?q=">Country</option>
-            <option value="http://search.yahoo.com/search?p=">Yahoo!</option>
         </select>
         For:
         <input type="text" name="searchterms">
         <input type="submit" name="SearchSubmit" value="Search">
     </form> -->
 
-    <form name="searchform" action="/searchLocation" method="get">
-        Search:
-        <select name="choice">
-            <option value="Continental">Continental</option>
-            <option value="Country">Country</option>
-        </select>
-        For:
-        <input type="text" name="searchterms">
-        <input type="submit" name="SearchSubmit" value="Search">
-    </form>
+    <div class="row">
+        <div class="col-md-8">
+            <form name="searchform" action="/searchLocation" method="get">
+                Search:
+                <select name="choice">
+                    <option value="Continental">Continental</option>
+                    <option value="Country">Country</option>
+                    <option value="Timezone">Timezone</option>
+                </select>
+                For:
+                <input type="text" name="searchterms">
+                <input type="submit" name="SearchSubmit" value="Search">
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <form name="refresh" action="/searchAirports" method="get">
+                <input class="btn btn-primary" type="button" name="refresh" value="Refresh Database Center">
+            </form>
+        </div>
+    </div>
+
 
 
 

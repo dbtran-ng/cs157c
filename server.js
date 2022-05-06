@@ -609,7 +609,7 @@ app.get('/searchLocation', (req, res) => {
         },
         (err, data) => {
           if (err) {
-            console.log(err);
+            res.redirect('/searchAirports');
           } else {
             res.render('search.ejs', { data: data });
           }
@@ -621,7 +621,7 @@ app.get('/searchLocation', (req, res) => {
   }
   if (req.query.choice === 'Continental') {
     try {
-      if (req.query.searchterms == 'North America') {
+      if (req.query.searchterms === 'North America') {
         Airport.find(
           {
             country: {
@@ -630,14 +630,13 @@ app.get('/searchLocation', (req, res) => {
           },
           (err, data) => {
             if (err) {
-              console.log(err);
+              res.redirect('/searchAirports');
             } else {
               res.render('search.ejs', { data: data });
             }
           }
         );
-      }
-      if (req.query.searchterms == 'South America') {
+      } else if (req.query.searchterms === 'South America') {
         Airport.find(
           {
             country: {
@@ -646,14 +645,13 @@ app.get('/searchLocation', (req, res) => {
           },
           (err, data) => {
             if (err) {
-              console.log(err);
+              res.redirect('/searchAirports');
             } else {
               res.render('search.ejs', { data: data });
             }
           }
         );
-      }
-      if (req.query.searchterms == 'Europe') {
+      } else if (req.query.searchterms === 'Europe') {
         Airport.find(
           {
             country: {
@@ -662,14 +660,13 @@ app.get('/searchLocation', (req, res) => {
           },
           (err, data) => {
             if (err) {
-              console.log(err);
+              res.redirect('/searchAirports');
             } else {
               res.render('search.ejs', { data: data });
             }
           }
         );
-      }
-      if (req.query.searchterms == 'Africa') {
+      } else if (req.query.searchterms === 'Africa') {
         Airport.find(
           {
             country: {
@@ -684,8 +681,7 @@ app.get('/searchLocation', (req, res) => {
             }
           }
         );
-      }
-      if (req.query.searchterms == 'Asia') {
+      } else if (req.query.searchterms === 'Asia') {
         Airport.find(
           {
             country: {
@@ -700,8 +696,7 @@ app.get('/searchLocation', (req, res) => {
             }
           }
         );
-      }
-      if (
+      } else if (
         req.query.searchterms == 'Oceania' ||
         req.query.searchterms == 'Australia'
       ) {
@@ -719,7 +714,28 @@ app.get('/searchLocation', (req, res) => {
             }
           }
         );
+      } else {
+        res.redirect('/searchAirports');
       }
+    } catch (error) {
+      console.log(error);
+      res.redirect('/searchAirports');
+    }
+  }
+  if (req.query.choice === 'Timezone') {
+    try {
+      Airport.find(
+        {
+          tz: { $regex: req.query.searchterms },
+        },
+        (err, data) => {
+          if (err) {
+            console.log(err);
+          } else {
+            res.render('search.ejs', { data: data });
+          }
+        }
+      );
     } catch (error) {
       console.log(error);
     }
