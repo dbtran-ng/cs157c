@@ -57,6 +57,39 @@
         </div>
     </div>
 
+
+    <p>Find Airports in Range of Certain Amount of Carriers</p>
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane  in active">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group mb-3">
+                        <div class="input-group mb-3">
+                            <form class="form-inline my-2 my-lg-0" action="/searchCarriers" method="get">
+
+                                <div class="form-group mr-2">
+                                    <select name="choice">
+                                        <option value="LessEqual" selected>Less or Equal Than</option>
+                                        <option value="GreaterEqual">Greater or Equal than</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+
+                                    <input class="form-control mr-sm-2" type="number" name="number"
+                                        placeholder="Enter Number">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
+                                            class="fa fa-search"></i></button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- <form name="searchform" onSubmit="dosearch()">
         Search:
         <select name="sengines">
@@ -74,8 +107,10 @@
             <form name="searchform" action="/searchLocation" method="get">
                 Search:
                 <select name="choice">
-                    <option value="Continental">Continental</option>
+                    <option value="Code" selected>Code</option>
+                    <option value="City">City</option>
                     <option value="Country">Country</option>
+                    <option value="Continental">Continental</option>
                     <option value="Timezone">Timezone</option>
                 </select>
                 For:
@@ -104,9 +139,9 @@
                 <thead>
                     <tr>
                         <th scope="col">_id</th>
+                        <th scope="col"></th>
                         <th scope="col">code</th>
                         <th scope="col">icao</th>
-                        <th scope="col">name</th>
                         <th scope="col">city</th>
                         <th scope="col">state</th>
                         <th scope="col">country</th>
@@ -134,7 +169,7 @@
                                     <%= airport.icao %>
                                 </td>
                                 <td>
-                                    <%= airport.name %>
+                                    <%= airport.icao %>
                                 </td>
                                 <td>
                                     <%= airport.city %>

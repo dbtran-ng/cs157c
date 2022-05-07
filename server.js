@@ -534,6 +534,46 @@ app.get('/searchRange', (req, res) => {
   }
 });
 
+// search range of airports based on latitude and longitude
+app.get('/searchCarriers', (req, res) => {
+  let choice = req.query.choice;
+  if (choice === 'LessEqual') {
+    try {
+      Airport.find(
+        {
+          carriers: { $lte: req.query.number },
+        },
+        (err, data) => {
+          if (err) {
+            console.log(err);
+          } else {
+            res.render('search.ejs', { data: data });
+          }
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    try {
+      Airport.find(
+        {
+          carriers: { $gte: req.query.number },
+        },
+        (err, data) => {
+          if (err) {
+            console.log(err);
+          } else {
+            res.render('search.ejs', { data: data });
+          }
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+});
+
 app.get('/searchAirports', (req, res) => {
   Airport.find({}, function (err, airports) {
     res.render('search.ejs', {
@@ -601,6 +641,42 @@ app.get('/searchCountryAirports', (req, res) => {
 });
 
 app.get('/searchLocation', (req, res) => {
+  if (req.query.choice === 'Code') {
+    try {
+      Airport.find(
+        {
+          code: { $regex: req.query.searchterms },
+        },
+        (err, data) => {
+          if (err) {
+            res.redirect('/searchAirports');
+          } else {
+            res.render('search.ejs', { data: data });
+          }
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  if (req.query.choice === 'City') {
+    try {
+      Airport.find(
+        {
+          city: { $regex: req.query.searchterms },
+        },
+        (err, data) => {
+          if (err) {
+            res.redirect('/searchAirports');
+          } else {
+            res.render('search.ejs', { data: data });
+          }
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
   if (req.query.choice === 'Country') {
     try {
       Airport.find(
@@ -772,6 +848,27 @@ app.get('/aggregate', async (req, res) => {
       console.log(error);
     }
   }
+  if (req.query.choice === 'Airports') {
+    try {
+      const pipeline = [
+        {
+          $match: {
+            type: 'Airports',
+          },
+        },
+        { $group: { _id: req.query.term, count: { $sum: 1 } } },
+      ];
+      const aggCursor = Airport.aggregate(pipeline);
+      for await (const doc of aggCursor) {
+        console.log(doc);
+        res.render('aggregate.ejs', {
+          data: doc,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   if (req.query.choice === 'Country') {
     try {
       const pipeline = [
@@ -790,6 +887,27 @@ app.get('/aggregate', async (req, res) => {
           data: doc,
         });
       }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  if (req.query.choice === 'Country-Ele') {
+    try {
+      const pipeline = [
+        {
+          $match: {
+            country: req.query.term,
+          },
+        },
+        { $sort: { elev: -1 } },
+        { $limit: 1 },
+      ];
+      Airport.aggregate(pipeline, (err, data) => {
+        console.log(data);
+        res.render('aggregate.ejs', {
+          data: data,
+        });
+      });
     } catch (error) {
       console.log(error);
     }

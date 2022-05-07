@@ -23,8 +23,11 @@
         Aggregate with:
         <select name="choice">
             <option value="Direct Flights" selected>Direct Flights</option>
-            <option value="Country">Country</option>
+            <option value="Airports">By Airports - Total Direct Flights</option>
+            <option value="Country">By Country - Total Direct Flights</option>
+            <option value="Country-Ele">By Country - Max Elevation</option>
             <option value="Carriers">Carriers</option>
+
         </select>
         Match:
         <input type="text" name="term" placeholder="Keyword">
@@ -46,6 +49,7 @@
                             <th scope="col">_id</th>
                             <th></th>
                             <th scope="col">country</th>
+                            <th scope="col">elevation</th>
                             <th scope="col">direct_flights</th>
                             <th scope="col">carriers</th>
                         </tr>
@@ -61,6 +65,9 @@
                                 </th>
                                 <td>
                                     <%= airport.country %>
+                                </td>
+                                <td>
+                                    <%= airport.elev %>
                                 </td>
                                 <td>
                                     <%= airport.direct_flights %>
